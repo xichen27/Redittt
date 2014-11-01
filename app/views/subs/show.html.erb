@@ -1,0 +1,31 @@
+<h1><%=@sub.title%></h1>
+
+<p><%=@sub.description%></p>
+
+<ul>
+<%@sub.posts.each do |post|%>
+   
+   <li>
+     <% if current_user.id == post.author_id%>
+       <%= link_to post.title, edit_post_url(post)%>
+     <%else%>
+       <%=post.title%>
+     <%end%>
+    <br>
+   <%=post.author.username%>
+   <br>
+   <%=post.content%></li>
+   <br>
+ 
+<%end%>
+
+</ul>
+
+
+<%=link_to "make a post", new_sub_post_url(@sub)%>
+<br>
+<%=link_to "All subs", subs_url%>
+<br>
+<%=link_to "this sub moderator", user_url(@user)%>
+<br>
+<%=link_to "go home", user_url(current_user)%>
